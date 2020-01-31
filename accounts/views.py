@@ -8,9 +8,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class SignUp(CreateView):
     template_name = 'accounts/signup.html'
     form_class = forms.UserCreateForm
-    success_url = 'personal_info'
+    success_url = reverse_lazy('accounts:personal_info')
 
-class PersonalInfoView(CreateView, LoginRequiredMixin):
-    login_url = 'accounts:login'
+class PersonalInfoView(LoginRequiredMixin, CreateView):
+    login_url = 'accounts/login'
     template_name = 'accounts/personal_info_form.html'
     form_class = forms.PersonalInfoForm
