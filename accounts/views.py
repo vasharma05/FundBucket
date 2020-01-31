@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, TemplateView, FormView
 from accounts import forms
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpRequest
 # Create your views here.
 
 class SignUp(CreateView):
@@ -10,7 +11,11 @@ class SignUp(CreateView):
     form_class = forms.UserCreateForm
     success_url = reverse_lazy('accounts:personal_info')
 
-class PersonalInfoView(LoginRequiredMixin, CreateView):
-    login_url = 'accounts/login'
+class PersonalInfoView(CreateView):
+    login_url = reverse_lazy('accounts:login')
     template_name = 'accounts/personal_info_form.html'
     form_class = forms.PersonalInfoForm
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)

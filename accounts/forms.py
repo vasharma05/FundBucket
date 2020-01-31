@@ -12,4 +12,4 @@ class UserCreateForm(UserCreationForm):
 class PersonalInfoForm(forms.ModelForm):
     class Meta():
         model = models.PersonalInfo
-        fields = "__all__"
+        fields = ["roll_no", 'department', 'profile_pic']

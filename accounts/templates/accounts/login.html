@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>FundBucket | Login</title>
+{% endblock %}
+{% block content %}
+<form method="POST">
+    {{form.as_p}}
+    {% csrf_token %}
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}
