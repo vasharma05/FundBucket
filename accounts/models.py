@@ -6,3 +6,4 @@ class PersonalInfo(models.Model):
     roll_no = models.CharField(max_length=10, primary_key=True)
     department = models.CharField(max_length= 100, blank=True)
     profile_pic = models.ImageField(default='https://drive.google.com/open?id=16ZU24pGnhv3UUrdbb6vQSagFGiKHLMWX')
+    # registered = models.BooleanField(default=False)
