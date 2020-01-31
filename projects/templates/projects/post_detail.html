@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>FundBucket | Post Detail</title>
+{% endblock %}
+
+{% block content %}
+<p>{{ post.category }}</p>
+<p>{{ post.author }}</p>
+<p>{{ post.title }}</p>
+<p>{{ post.description }}</p>
+<p>{{ post.published_date }}</p>
+<p>{{ post.funds }}</p>
+<p>{{ post.total_funds }}</p>
+{% endblock %}
