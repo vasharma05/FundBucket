@@ -11,3 +11,7 @@ class CommentForm(forms.ModelForm):
     class Meta():
         model = models.Comment
         fields = ['text']
+
+class AddFunds(forms.Form):
+    value = forms.IntegerField()
+    

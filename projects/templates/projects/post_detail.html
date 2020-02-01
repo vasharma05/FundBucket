@@ -11,4 +11,29 @@
 <p>{{ post.published_date }}</p>
 <p>{{ post.funds }}</p>
 <p>{{ post.total_funds }}</p>
+
+
+{% if user.is_authenticated %}
+    <form action="{% url 'projects:add_funds' pk=post.pk %}" method="post">
+        {{ add_funds_form.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="Submit">
+    </form>
+{% endif %}
+
+{% if user.is_authenticated %}
+    <h4>Add Comment</h4>
+    <form action="{% url 'projects:comment_create' pk=post.pk %}" method="post">
+        {{ add_comment_form.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="Submit">
+    </form>
+{% endif %}
+
+{% for comment in post.comments.all %}
+    <h4>{{comment.author}}</h4>
+    <p>{{ comment.text }}</p>
+    {% empty %}
+    <p>No Comments!</p>
+{% endfor %}
 {% endblock %}

@@ -16,6 +16,7 @@ class PersonalInfoView(LoginRequiredMixin, CreateView):
     template_name = 'accounts/personal_info_form.html'
     form_class = forms.PersonalInfoForm
     success_url = reverse_lazy('home')
+    registered = False
 
     def form_valid(self, form):
         form.instance.user = self.request.user

@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <form method="POST">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <input type="submit" value="Submit">
-    </form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}<title>FundBucket | Sign Up</title>
+<link rel="stylesheet" href="{% static 'projects/signup.css' %}">
+{% endblock %}
+{% block content %}
+    <div id="signup-box">
+        <h1>SIGN UP</h1>
+        <form method="POST">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+{% endblock %}
