@@ -60,9 +60,16 @@
     </div>
 
   </div>
-  
-  
-  
+  user = models.OneToOneField(User,on_delete=models.CASCADE, primary_key=True)
+    mobile_number = models.IntegerField()
+    address = models.CharField(max_length=100)
+    city = models.CharField(max_length=50)
+    state = models.CharField(max_length=20)
+    account_number = models.IntegerField(null=True)
+    bank_ifsc = models.CharField(verbose_name='Bank IFSC Code', max_length=30, blank=True)    
+    profile_pic = models.ImageField(default='https://drive.google.com/open?id=16ZU24pGnhv3UUrdbb6vQSagFGiKHLMWX')
+    # registered = models.BooleanField(default=False)
+    fields = ['profile_pic', 'mobile_number', 'address', 'city', 'state', 'account_number', 'bank_ifsc']
   <script defer>
     window.onload = function(){
       var hm = document.getElementById('howmuch').innerHTML.trim();
