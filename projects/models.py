@@ -34,7 +34,7 @@ class Post(models.Model):
 class Comment(models.Model):
     post = models.ForeignKey(Post, related_name='comments', on_delete= models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    text = models.TextField(max_length=100)
+    text = models.TextField(verbose_name='Comment', max_length=100)
 
     def __str__(self):
         return self.text

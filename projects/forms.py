@@ -13,5 +13,5 @@ class CommentForm(forms.ModelForm):
         fields = ['text']
 
 class AddFunds(forms.Form):
-    value = forms.IntegerField()
+    amount = forms.IntegerField()
     

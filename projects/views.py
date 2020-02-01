@@ -7,15 +7,12 @@ from django.views.generic import (TemplateView, CreateView, ListView, UpdateView
                                     DetailView, DeleteView, FormView)
 # Create your views here.
 
-class PostListView(LoginRequiredMixin, ListView):
-    login_url = reverse_lazy('accounts:login')
+class PostListView(ListView):
     model = models.Post
-
     def get_queryset(self):
         return models.Post.objects.order_by('-published_date')
 
-class PostDetailView(LoginRequiredMixin, DetailView):
-    login_url = reverse_lazy('accounts:login')
+class PostDetailView(DetailView):
     model = models.Post
 
     def get_context_data(self, **kwargs):
@@ -81,11 +78,18 @@ def put_comment_on_post(request,pk):
 @login_required(login_url=reverse_lazy('accounts:login'))
 def add_funds_view(request, pk):
     add_funds_form = forms.AddFunds()
+    add_comment_form = forms.CommentForm()
     if request.method == 'POST':
         form = forms.AddFunds(request.POST)
+        form2 = forms.CommentForm(request.POST)
+        model = models.Comment(request.POST)
         if form.is_valid():
-            value = form.cleaned_data['value']
+            value = form.cleaned_data['amount']
             post = get_object_or_404(models.Post, pk=pk)
             post.add_funds(value)
             post.save()
+            model = form2.save(commit=False)
+            model.post = post
+            model.author = request.user
+            model.save()
             return redirect('projects:post_detail', pk=pk)
