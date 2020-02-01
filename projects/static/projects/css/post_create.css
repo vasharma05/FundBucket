@@ -1,24 +1,24 @@
 body{
     padding: 0;
 }
-#signup-box{
+#newpost-box{
     width: 80%;
-    max-width: 600px;
+    max-width: 800px;
     margin: 75px auto;
     padding-bottom: 1%;
     box-shadow: 0 3px 16px 0 rgba(0,0,0,0.2);
 }
-#signup-box h1{
+#newpost-box h1{
     text-align: center;
     background-color: rgb(4, 122, 122);
     width: 100%;
     padding: 15px 0;
     color: white;
 }
-#signup-box form{
+#newpost-box form{
     padding: 1% 5%;
 }
-#signup-box p{
+#newpost-box p{
     display: flex;
     flex-direction: column;
     row-gap: 5px;
@@ -42,7 +42,7 @@ hr{
     margin:  25px 0;
     color: rgb(4, 122, 122);
 }
-#signup-box a{
+#newpost-box a{
     text-align: right;
     margin-left: 5%;
     text-decoration: none;

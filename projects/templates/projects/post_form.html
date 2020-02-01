@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
 {% block title %}
-<title>FundBucket | Create Post</title>
+    {% load static %}
+    <title>FundBucket | New Post</title>
+    <link rel="stylesheet" href="{% static 'projects/css/post_create.css' %}">
 {% endblock %}
 
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit">
-</form>
+    <div id="newpost-box">
+        <h1>Add a new Post</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input class = 'button' type="submit" value="Submit">
+        </form>
+    </div>
 {% endblock %}
