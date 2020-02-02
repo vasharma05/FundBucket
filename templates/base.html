@@ -20,8 +20,16 @@
         <ul style="margin-left: auto;">
             {% if user.is_authenticated %}
                 <li><a href="">Notifications</a></li>
+
                 <!--  url 'projects:profile' pk=user.pk  -->
-                <li><a href=""><img src=''>@{{ user.username }}</a></li>
+                {% if user.personal %}
+                {% with 'media/'|add:user.personal.profile_pic.name as src %}
+                <li><a class ='welcome' href=""><img src='{{src}}'>
+                {% endwith %}
+                {% else %}
+                <li><a href=""><img src='user_default.png'>
+                {% endif %}
+                @{{ user.username }}</a></li>
             {% else %}
                 <li><a href="{% url 'accounts:login' %}">Login</a></li>
                 <li><a href="{% url 'accounts:signup' %}">Sign Up</a></li>

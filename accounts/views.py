@@ -17,10 +17,9 @@ class PersonalInfoView(LoginRequiredMixin, CreateView):
     template_name = 'accounts/personal_info_form.html'
     form_class = forms.PersonalInfoForm
     success_url = reverse_lazy('projects:post_list')
-    registered = False
 
     def get(self, request):
-        if request.user.personal.user:
+        if getattr(request.user, 'personal', None):
             return redirect('projects:post_list')
         else:
             form = forms.PersonalInfoForm()
@@ -33,7 +32,6 @@ class PersonalInfoView(LoginRequiredMixin, CreateView):
             model = form.save(commit=False)
             model.user = request.user
             model.save()
-            self.registered = True
             return redirect('projects:post_list')
     # def form_valid(self, form):
     #     form.instance.user = self.request.user

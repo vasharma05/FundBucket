@@ -22,7 +22,11 @@
             <a href="{% url 'projects:post_detail' pk=post.pk %}" class="res">
                 <div class="reschild">
                   <div class="resphoto">
-        
+                      {% if post.picture %}
+                        {% with "/media/"|add:post.picture.name as src %}
+                        <img src='{{ src }}'>
+                        {% endwith %}
+                    {% endif %}
                   </div>
                   <div class="fundescrip">{{ post.title }}</div>
                   <div class="moredes">{{ post.description }}</div>

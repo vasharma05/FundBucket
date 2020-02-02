@@ -55,6 +55,10 @@ html,body {
 .resphoto{
   background-color: rgba(255, 255, 255, 0.493);
   height: 200px;
+  overflow: hidden;
+}
+.resphoto img{
+  width: 100%;
 }
 .fundescrip{
   padding: 20px;

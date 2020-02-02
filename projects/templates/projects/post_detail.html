@@ -11,13 +11,7 @@
     <div style="flex: 1;"></div>
     <div class="lnametop">FundBucket</div>
 </div>
-<!-- <p>{{ post.category }}</p>
-<p>{{ post.author }}</p>
-<p>{{ post.title }}</p>
-<p>{{ post.description }}</p>
-<p>{{ post.published_date }}</p>
-<p>{{ post.funds }}</p>
-<p>{{ post.total_funds }}</p> -->
+
 
 <div class="flexcon">
     <img class="titleimg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTA4yQ2-CzEbEi9R6X5fotKMKIJyzAJGyBJORtw8hveiRcWbWeX" alt="">
@@ -26,9 +20,9 @@
 <div class="flexcon">
     <div class="fundcon">
       <div class="fdet">
-        <div style="font-weight: bold;">{{ post.user }}</div>
+        <a href='{% url 'accounts:profile' slug=post.user %}' style="font-weight: bold;">@{{ post.author }}</a>
         <div style="flex:1"></div>
-        <div>{{ post.published_date }}</div>
+        <div>{{ post.published_date|date }}</div>
       </div>
       <div class="progressbar">
         <div id="prog" class="done"></div>
@@ -46,7 +40,8 @@
         <span class="cat">Category: {{ post.category }}</span><br><br><br>
         {{ post.description }}
       </div>
-{% if user.is_authenticated %}
+{% if user.is_authenticated  %}
+{% if user.username != post.author.username %}
       <div class="contri">
         <div class="conttext">CONTRIBUTE</div>
         <form action="{% url 'projects:add_funds' pk=post.pk %}" method="post">
@@ -56,6 +51,7 @@
           <button class="donb">DONATE</button>
         </form>
       </div>
+      {% endif %}
 {% endif %}
 <h4>Comments</h4>
 {% for comment in post.comments.all %}

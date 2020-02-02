@@ -17,6 +17,7 @@ class Post(models.Model):
     deadline = models.DateField(blank=True, null=True)
     funds = models.IntegerField(default=0)
     total_funds = models.IntegerField()
+    picture = models.ImageField(upload_to='post_picture/',blank=True, null=True)
     
     def add_funds(self, value):
         self.funds += value
