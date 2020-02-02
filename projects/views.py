@@ -54,9 +54,6 @@ class UserPostView(LoginRequiredMixin,  ListView):
 
 
 
-
-
-
 @login_required(login_url=reverse_lazy('accounts:login'))
 def put_comment_on_post(request,pk):
     post = get_object_or_404(models.Post, pk=pk)

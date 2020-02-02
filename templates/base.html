@@ -19,17 +19,19 @@
         </ul>
         <ul style="margin-left: auto;">
             {% if user.is_authenticated %}
-                <li><a href="">Notifications</a></li>
+                <li><a href="" style="margin-top: 15px">Notifications</a></li>
+                <li><a href="{% url 'projects:user_posts' %}" style="margin-top: 15px">Your Fund Raisers</a></li>
 
                 <!--  url 'projects:profile' pk=user.pk  -->
                 {% if user.personal %}
-                {% with 'media/'|add:user.personal.profile_pic.name as src %}
+                {% with '/media/'|add:user.personal.profile_pic.name as src %}
                 <li><a class ='welcome' href=""><img src='{{src}}'>
                 {% endwith %}
                 {% else %}
-                <li><a href=""><img src='user_default.png'>
+                <li><a class="welcome" href=""><img src='/media/profile_pic/user_default.png'>
                 {% endif %}
                 @{{ user.username }}</a></li>
+                <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
             {% else %}
                 <li><a href="{% url 'accounts:login' %}">Login</a></li>
                 <li><a href="{% url 'accounts:signup' %}">Sign Up</a></li>

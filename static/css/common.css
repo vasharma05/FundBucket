@@ -43,3 +43,7 @@ nav .welcome img{
     margin-right: 12px;
     border-radius: 50%;
 }
+a{
+    text-decoration: none;
+    color: inherit;
+}
