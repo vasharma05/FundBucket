@@ -9,5 +9,5 @@ class PersonalInfo(models.Model):
     state = models.CharField(max_length=20, blank=True)
     account_number = models.IntegerField(null=True)
     bank_ifsc = models.CharField(verbose_name='Bank IFSC Code', max_length=30, blank=True)   
-    profile_pic = models.ImageField(default='/media/profile_pic/user_default.png', upload_to='profile_pic/') 
+    profile_pic = models.ImageField(default='profile_pic/user_default.png', upload_to='profile_pic/') 
     # registered = models.BooleanField(default=False)

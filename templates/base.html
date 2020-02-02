@@ -25,7 +25,7 @@
                 <!--  url 'projects:profile' pk=user.pk  -->
                 {% if user.personal %}
                 {% with '/media/'|add:user.personal.profile_pic.name as src %}
-                <li><a class ='welcome' href=""><img src='{{src}}'>
+                <li><a class ='welcome' href="{% url 'accounts:profile' username=user.username %}"><img src='{{src}}'>
                 {% endwith %}
                 {% else %}
                 <li><a class="welcome" href=""><img src='/media/profile_pic/user_default.png'>
