@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, TemplateView, FormView
 from accounts import forms
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from . import models
+from django.contrib.auth.models import User
 # Create your views here.
 
 class SignUp(CreateView):
@@ -39,4 +40,6 @@ class PersonalInfoView(LoginRequiredMixin, CreateView):
     #     print(form.instance.profile_pic)
     #     # return super().form_valid(form)
 
-    
+def profile_view(request, username):
+    profile_user = get_object_or_404(User, username=username)
+    return render(request, 'accounts/profile.html', context={'profile_user':profile_user})

@@ -20,7 +20,7 @@
 <div class="flexcon">
     <div class="fundcon">
       <div class="fdet">
-        <a href='{% url 'accounts:profile' slug=post.user %}' style="font-weight: bold;">@{{ post.author }}</a>
+        <a href='{% url 'accounts:profile' username=post.author %}' style="font-weight: bold;">@{{ post.author }}</a>
         <div style="flex:1"></div>
         <div>{{ post.published_date|date }}</div>
       </div>
