@@ -2,9 +2,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
+from django.http import HttpResponse
 from . import forms, models
 from django.views.generic import (TemplateView, CreateView, ListView, UpdateView, 
                                     DetailView, DeleteView, FormView)
+
 # Create your views here.
 
 class PostListView(ListView):
@@ -90,3 +92,4 @@ def add_funds_view(request, pk):
             model.author = request.user
             model.save()
             return redirect('projects:post_detail', pk=pk)
+

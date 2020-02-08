@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from FundBucket import settings
 from django.conf.urls.static import static
+# import BlockChain.contract_interface as ci
 
 app_name = 'projects'
 
@@ -12,5 +13,5 @@ urlpatterns = [
     path('post_create/', views.PostCreateView.as_view(), name='post_create'),
     path('post/<int:pk>/comment', views.put_comment_on_post, name='comment_create'),
     path('user_posts/', views.UserPostView.as_view(), name='user_posts'),
-    path('post/<int:pk>/funds', views.add_funds_view, name='add_funds')
+    path('post/<int:pk>/funds', views.add_funds_view, name='add_funds'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
