@@ -96,6 +96,8 @@ def add_funds_view(request, pk):
             model.save()
             return redirect('projects:post_detail', pk=pk)
 
+
+# TO DO
 def checkconnectivity(request):
     return str(web3.isconnected())
 @csrf_exempt
