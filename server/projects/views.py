@@ -118,7 +118,7 @@ def CreateFunderForBucket(request):
     account = js['account']
     Funder=ci.CreateFunder(name,acc=account)
     user=ci.registerFunder(FunderContract,Funder)
-    return json.dumps({'response':True})
+    return JsonResponse({'response':True})
 
 @csrf_exempt
 def registerFundSeeker(request):
