@@ -147,7 +147,9 @@ def endVotingFor():
 
 @csrf_exempt
 def vote():
-    vote=request.json['vote']
+    vote=request.read()
+    js = json.loads(js)
+    vote = js['vote']
     ci.voteFor(FunderContract,fundSeeker,Funder,vote)
 
 @csrf_exempt
