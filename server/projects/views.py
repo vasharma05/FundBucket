@@ -1,12 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse_lazy
 from django.http import HttpResponse
 from . import forms, models
 from django.views.generic import (TemplateView, CreateView, ListView, UpdateView, 
                                     DetailView, DeleteView, FormView)
-
+from django.http import JsonResponse
+from django.core import serializers
+import json
 # Create your views here.
 
 class PostListView(ListView):
@@ -93,3 +96,64 @@ def add_funds_view(request, pk):
             model.save()
             return redirect('projects:post_detail', pk=pk)
 
+def checkconnectivity(request):
+    return str(web3.isconnected())
+@csrf_exempt
+def CreateNewFundSeeker(request):
+    js = request.read()
+    js = json.loads(js)
+    name = js['name']
+    account = js['account']
+    FundSeeker = ci.CreateFundseeker(FundSeekerContract, 'Campaign', FundSeeker.getAcc())
+    FundSeeker.setContractAcc(contract_FundSeeker)
+    return JsonResponse({'response':True})
+
+@csrf_exempt
+def CreateFunderForBucket(request):
+    js = request.read()
+    js = json.loads(js)
+    name = js['name']
+    account = js['account']
+    Funder=ci.CreateFunder(name,acc=account)
+    user=ci.registerFunder(FunderContract,Funder)
+    return json.dumps({'response':True})
+
+@csrf_exempt
+def registerFundSeeker(request):
+    tx=ci.registerFundSeeker(FunderContract,funder=Funder,fund_seeker=fundSeeker)
+    return JsonResponse({'response':True,'description':str(tx)})
+
+@csrf_exempt
+def getFundSeeker(request):
+    tx=ci.getFundSeeker(FundSeekerContract,fundSeeker)
+    return JsonResponse({'response':True,'description':str(tx)})
+
+@csrf_exempt
+def sendMoneyToFundSeeker():
+    [tx,val]=ci.sendMoneyToFundSeeker(FunderContract,Funder,fundSeeker)
+    return JsonResponse({'response':True,'tx':str(tx),'val':val})
+
+@csrf_exempt
+def startVotingFor():
+    ci.startVotingFor(FunderContract,Funder.getAcc(),fundSeeker.getAcc())
+    return JsonResponse({'response':True})
+
+@csrf_exempt
+def endVotingFor():
+    ci.endVotingFor(FunderContract,Funder.getAcc(),fundSeeker.getAcc())
+    return JsonResponse({'response':True})
+
+@csrf_exempt
+def vote():
+    vote=request.json['vote']
+    ci.voteFor(FunderContract,fundSeeker,Funder,vote)
+
+@csrf_exempt
+def isAllowedToWithDraw():
+    p=ci.isAllowedToWithDraw(FundSeekerContract,fundSeeker,fundSeeker)
+    return JsonResponse({'response':True,'body':str(p)})
+
+@csrf_exempt
+def getCurrentFundingStageFor():
+    p=ci.getCurrentFundingStageFor(FunderContract,Funder,fundSeeker)
+    return p
